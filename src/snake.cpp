@@ -3,14 +3,19 @@
 #include <iostream>
 
 void Snake::Update() {
+
+  // Capture the head coordinate cell before updating
   SDL_Point prev_cell{
       static_cast<int>(head_x),
       static_cast<int>(
-          head_y)};  // We first capture the head's cell before updating.
+          head_y)};  
+
   UpdateHead();
+
+  // Capture the head's cell after updating.
   SDL_Point current_cell{
       static_cast<int>(head_x),
-      static_cast<int>(head_y)};  // Capture the head's cell after updating.
+      static_cast<int>(head_y)};  
 
   // Update all of the body vector items if the snake head has moved to a new
   // cell.
@@ -18,6 +23,10 @@ void Snake::Update() {
     UpdateBody(current_cell, prev_cell);
   }
 }
+
+// In SDL the origin is located at upper left corner. So when snake goes Up and Left,
+// the coordinate is aheading down; when snake goes Down and Right, the coordinates
+// is aheading up
 
 void Snake::UpdateHead() {
   switch (direction) {
@@ -39,7 +48,8 @@ void Snake::UpdateHead() {
   }
 
   // Wrap the Snake around to the beginning if going off of the screen.
-  head_x = fmod(head_x + grid_width, grid_width);
+  // fmod(numer, denom), return the floating-point remainder
+  head_x = fmod(head_x + grid_width, grid_width); 
   head_y = fmod(head_y + grid_height, grid_height);
 }
 
