@@ -47,15 +47,20 @@ void Snake::UpdateHead() {
       break;
   }
 
-  // Wrap the Snake around to the beginning if going off of the screen.
+  // Wrap the Snake around to the beginning if going off of the screen
   // fmod(numer, denom), return the floating-point remainder
+  // If the head x/y coordinate is bigger than grip, fmod returns the remainder
   head_x = fmod(head_x + grid_width, grid_width); 
   head_y = fmod(head_y + grid_height, grid_height);
 }
 
 void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) {
   // Add previous head location to vector
+  // vector.push_back(element): add element at the end of vector
   body.push_back(prev_head_cell);
+
+  // Add previous head to vector and remove the tail from vector is how we see
+  // snake is moving
 
   if (!growing) {
     // Remove the tail from the vector.
@@ -67,6 +72,7 @@ void Snake::UpdateBody(SDL_Point &current_head_cell, SDL_Point &prev_head_cell) 
 
   // Check if the snake has died.
   for (auto const &item : body) {
+    // If snake hit itself, it dies
     if (current_head_cell.x == item.x && current_head_cell.y == item.y) {
       alive = false;
     }

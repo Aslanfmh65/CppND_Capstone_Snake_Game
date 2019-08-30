@@ -1,15 +1,20 @@
 #include "game.h"
 #include <iostream>
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
+// Uniformly generate a food in the map
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : snake(grid_width, grid_height),
+      // Random number generator
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
       random_h(0, static_cast<int>(grid_height)) {
+
+  // Method to place food on map
   PlaceFood();
 }
 
+// Run the game
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
   Uint32 title_timestamp = SDL_GetTicks();
@@ -75,7 +80,8 @@ void Game::Update() {
 
   // Check if there's food over here
   if (food.x == new_x && food.y == new_y) {
-    score++;
+    // If snake eats the food, score increases
+    score++; 
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();

@@ -1,10 +1,11 @@
 #include "controller.h"
 #include <iostream>
-#include "SDL.h"
+#include "SDL2/SDL.h"
 #include "snake.h"
 
 void Controller::ChangeDirection(Snake &snake, Snake::Direction input,
                                  Snake::Direction opposite) const {
+  // Make sure snake does not go into its own body
   if (snake.direction != opposite || snake.size == 1) snake.direction = input;
   return;
 }
@@ -15,6 +16,7 @@ void Controller::HandleInput(bool &running, Snake &snake) const {
     if (e.type == SDL_QUIT) {
       running = false;
     } else if (e.type == SDL_KEYDOWN) {
+      // If key is pressed down, we will determine which one is pressed
       switch (e.key.keysym.sym) {
         case SDLK_UP:
           ChangeDirection(snake, Snake::Direction::kUp,
