@@ -73,6 +73,8 @@ cmath
 -
 iostream
 -
+thread
+-
 
 /home/aslanfeng/Documents/c++/CppND_Capstone_Snake_Game/src/snake.h
 vector

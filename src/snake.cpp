@@ -1,6 +1,7 @@
 #include "snake.h"
 #include <cmath>
 #include <iostream>
+#include<thread>
 
 void Snake::Update() {
 

@@ -9,25 +9,16 @@
 
 class Game {
  public:
-
-  // Game constructor 
   Game(std::size_t grid_width, std::size_t grid_height);
-
-  // Method to run the game
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
-
-  // Method to get score
   int GetScore() const;
-
-  // Method to get size of snake
   int GetSize() const;
 
  private:
   Snake snake;
   SDL_Point food;
 
-  // Random number generator
   std::random_device dev;
   std::mt19937 engine;
   std::uniform_int_distribution<int> random_w;
@@ -37,7 +28,6 @@ class Game {
 
   void PlaceFood();
   void Update();
-
 };
 
 #endif
