@@ -37,6 +37,7 @@ class Game {
 
   void PlaceFood();
   void Update();
+
 };
 
 #endif
